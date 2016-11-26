@@ -3,13 +3,13 @@ subroutine read_prm()
 	implicit none
 
 	integer :: fi = 11, is
-	
+
 	open(fi, file='prm.dat', action='read', iostat = is)
 	if (is /= 0) stop 'cannot open a parameter file'
 	read(fi, *) cri_res
 	read(fi, *) omg
 	read(fi, *) omax
-	read(fi, *) nin 
+	read(fi, *) nin
 	read(fi, *) rmax
 	read(fi, *) at
 	read(fi, *) omode
@@ -21,14 +21,14 @@ end subroutine read_prm
 subroutine read_mat()
 	use globvar
 	implicit none
-	
+
 	integer i, is, k1, k2, l
 	integer :: fo_AR = 11, fo_ja = 12, fo_ip = 13
 
 	open(fo_AR, file = 'RANDL7T/AR.crs', action = 'read', iostat = is)
 	if (is /= 0) stop 'cannot open AR file'
 	read(fo_AR, *) m, n, nnz
-	
+
 	allocate(AR(nnz))
 	allocate(ja(nnz))
 	allocate(ip(m+1))
@@ -58,23 +58,23 @@ subroutine read_mat()
 		b(i) = sum(AR(k1:k2))
 	enddo
 
-end subroutine read_mat 
+end subroutine read_mat
 !-----------------------------------------------------------
 
 subroutine output(Iter, Riter, t_tot, RelRes, x)
-	use func
+   use func
 	use globvar
 	implicit none
 
 	real(dp), intent(in) :: t_tot, x(n)
 	real(dp), intent(inout) :: RelRes(Iter)
 	real(dp) r(m), ATr(n)
-	real(dp) norm_b, norm_r, tmp, norm_ATr, norm_ATb
+	real(dp) nrm_b, nrm_r, tmp, nrmATr, nrmATb
 	integer, intent(in) :: Iter, Riter
-	integer :: info = 10, reshis = 11, sol = 12 
+	integer :: info = 10, reshis = 11, sol = 12
 	integer i, is, j, l, k, k1, k2
 
-	norm_b = nrm2(b(1:m), m) 
+	nrm_b = nrm2(b(1:m), m)
 
 	ATr(1:n) = zero
 	do i = 1, m
@@ -85,17 +85,17 @@ subroutine output(Iter, Riter, t_tot, RelRes, x)
 		enddo
 	enddo
 
-	norm_ATb = nrm2(ATr(1:n), n) 
-	
-	do i = 1, m
-	 k1 = ip(i)
-	 k2 = ip(i+1)-1
-	 r(i) = sum(AR(k1:k2)*x(ja(k1:k2))) 
+	nrmATb = nrm2(ATr(1:n), n)
+
+   do i = 1, m
+      k1 = ip(i)
+      k2 = ip(i+1)-1
+      r(i) = sum(AR(k1:k2)*x(ja(k1:k2)))
 	enddo
 
 	r(1:m) = b(1:m) - r(1:m)
 
-	norm_r = nrm2(r(1:m), m) 
+	nrm_r = nrm2(r(1:m), m)
 
 	ATr(1:n) = zero
 	do i = 1, m
@@ -106,10 +106,10 @@ subroutine output(Iter, Riter, t_tot, RelRes, x)
 		enddo
 	enddo
 
-	norm_ATr = nrm2(ATr(1:n), n) 
+	nrmATr = nrm2(ATr(1:n), n)
 
-	tmp = one / norm_b
-	RelRes(1:Iter) = tmp * RelRes(1:Iter)
+	tmp = one / nrm_b
+	relres(1:iter) = tmp * relres(1:iter)
 
 	if (omode == 0) then
 
@@ -119,15 +119,15 @@ subroutine output(Iter, Riter, t_tot, RelRes, x)
 		write(*, *) ' # of restarts: ', Riter
 		write(*, *) ' Restart cycle: ', omax
 		write(*, '(a, f16.5)') '  CPU time: ', t_tot
-		write(*, *) ' Relative residual: ', RelRes(Iter)
-		write(*, *) ' Actual relative residual (ATr): ', norm_ATr / norm_ATb
-		write(*, *) ' Actual relative residual (r): ', norm_r / norm_b
+		write(*, *) ' Relative residual: ', relres(iter)
+		write(*, *) ' Actual relative residual (ATr): ', nrmATr / nrmATb
+		write(*, *) ' Actual relative residual (r): ', nrm_r / nrm_b
 		write(*, *) " "
 
 	else
 
 		write(*, '(f6.3, f16.5, i9)') omg, t_tot, Iter
-	
+
 	endif
 
 	open(info, file='info.dat', action='write', iostat=is, status='replace')
@@ -135,22 +135,22 @@ subroutine output(Iter, Riter, t_tot, RelRes, x)
 	write(info, *) ' # of outer iterations: ', Iter
 	write(info, *) ' # of inner iterations: ', nin
 	write(info, *) ' # of restarts: ', Riter
-	write(info, *) ' Restart cycle: ', omax		
+	write(info, *) ' Restart cycle: ', omax
 	write(info, '(a, f16.5)') '  CPU time: ', t_tot
 	write(info, *) ' Relative residual: ', RelRes(Iter)
-	write(info, *) ' Actual relative residual (ATr): ', norm_ATr / norm_ATb	
-	write(info, *) 'Actual relative residual (r): ', norm_r / norm_b
+	write(info, *) ' Actual relative residual (ATr): ', nrmATr / nrmATb
+	write(info, *) 'Actual relative residual (r): ', nrm_r / nrm_b
 	close(info)
-	
+
 	open(reshis, file='reshis.dat', action='write', iostat=is, status='replace')
-	if (is /= 0) stop 'cannot open reshis.dat file'	
-	do k = 1, Iter
-		write(reshis, *) k, RelRes(k) 
+	if (is /= 0) stop 'cannot open reshis.dat file'
+	do k = 1, iter
+		write(reshis, *) k, relres(k)
 	enddo
 	close(reshis)
-	
+
 	open(sol, file='solution.dat', action='write', iostat=is, status='replace')
-	if (is /= 0) stop 'cannot open solution.dat file'	
+	if (is /= 0) stop 'cannot open solution.dat file'
 	do j = 1, n
 		write(sol, *) x(j)
 	enddo
@@ -161,10 +161,9 @@ end subroutine output
 subroutine discard()
 	use globvar
 	implicit none
-	
+
 	deallocate(AR, ja, ip)
 	deallocate(b)
 	deallocate(ATei)
 
 end subroutine discard
-

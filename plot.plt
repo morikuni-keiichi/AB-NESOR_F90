@@ -8,4 +8,4 @@ set multiplot
 set key spacing 0 height 1
 plot "reshis.dat" title "ABGMRES-NESOR" w l
 set nomultiplot
-pause -1
+pause mouse
