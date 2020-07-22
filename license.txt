@@ -1,4 +1,4 @@
-This project is licensed under the terms of the GNU license http://www.gnu.org/copyleft/gpl.html.
+This program is licensed under the terms of the GNU license http://www.gnu.org/copyleft/gpl.html.
 
 If you use this code in research for publication, please cite the papers
 
