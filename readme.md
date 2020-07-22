@@ -30,13 +30,13 @@ $ make
 
 Change the Fortran compiler given in the Makefile file if necessary.
 
-To simply run the program with the default values of parameters on a test matrix RANDL7, execute the following:
+To simply run the program with the default values of parameters on a test matrix RANDL7T, execute the following:
 
 ```
 $ ./main 
 ```
 Then the program outputs the approximate solution data solution.dat, the result data info.dat, and the relative residual norm history data reshis.dat.
-The test matrix called RANDL7 in the compressed column storage (CCS) format is given in directory RANDL7.
+The test matrix called RANDL7T in the compressed column storage (CCS) format is given in directory RANDL7T.
 Some specific data is output in log.csv.
 
 ## Contacts
