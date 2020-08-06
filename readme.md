@@ -37,7 +37,40 @@ $ ./main
 ```
 Then the program outputs the approximate solution data solution.dat, the result data info.dat, and the relative residual norm history data reshis.dat.
 The test matrix called RANDL7T in the compressed column storage (CCS) format is given in directory RANDL7T.
+
+To run the program with specific values of parameters on the test matrix RANDL7, execute the following:
+
+```
+$ ./main --at=1 --nin=50 --omg=1.0 --tol=1.0e-8 --omax=800 --rmax=0 -v --directory=RANDL7T/
+```
+
 Some specific data is output in log.csv.
+
+- `--at=`
+This option enables to automatically determine the values of the number of inner
+iterations and the relaxation parameter. A value for this option must be provided;
+possible values are
+-- `0`: turn off the automatic parameter tuning
+-- `1`: turn on it.
+The values of the NR-SOR inner-iteration parameters can be automatically tuned at each restart or specified by you.
+
+- `--nin=`: Nonnegative integer
+This option determines the  
+	- number of inner iterations for the setting for `--a=0`
+	- maximum number of inner iterations for `--at=n`, n > 0 and the actual number of inner iterations are automatically determined.
+
+- `--omg=`: This option determines the value of the relaxation parameter for `--at=0`; otherwise the value provided is used as the initial value of the relaxation parameter for the automatic parameter tuning.
+
+- `--tol=`: This option determines the threshold in terms of the relative residual norm for terminating the iterations. Typically, the value is less than one.
+
+- `--omax=`: This option determines the maximum number of outer iterations.
+
+- `--rmax=`: This option determines the number of restart cycles. The restart is turned off for `—rmax=0`.
+
+- `-v`: This option enables a detailed output display.  
+
+- `--fi=`: This option determines the directory name in which the matrix data used is contained. 
+The directory name must be the relative one.
 
 ## Contacts
 
