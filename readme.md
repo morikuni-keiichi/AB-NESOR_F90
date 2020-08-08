@@ -46,13 +46,11 @@ $ ./main --at=1 --nin=50 --omg=1.0 --tol=1.0e-8 --omax=800 --rmax=0 -v --directo
 
 Some specific data is output in log.csv.
 
-- `--at=`
 This option enables to automatically determine the values of the number of inner
 iterations and the relaxation parameter. A value for this option must be provided;
 possible values are
--- `0`: turn off the automatic parameter tuning
--- `1`: turn on it.
-The values of the NR-SOR inner-iteration parameters can be automatically tuned at each restart or specified by you.
+-- `0`: disable the automatic parameter tuning (The values of the NR-SOR inner-iteration parameters can be specified.)
+-- `1`: enable it (The values of the NR-SOR inner-iteration parameters can be automatically tuned at each restart.)
 
 - `--nin=`: Nonnegative integer
 This option determines the  
@@ -65,11 +63,11 @@ This option determines the
 
 - `--omax=`: This option determines the maximum number of outer iterations.
 
-- `--rmax=`: This option determines the number of restart cycles. The restart is turned off for `—rmax=0`.
+- `--rmax=`: This option determines the maximum number of restart cycles. The restart is turned off for `—rmax=0`.
 
 - `-v`: This option enables a detailed output display.  
 
-- `--fi=`: This option determines the directory name in which the matrix data used is contained. 
+- `--directory=`: This option determines the directory name in which the matrix data used is contained. 
 The directory name must be the relative one.
 
 ## Contacts
