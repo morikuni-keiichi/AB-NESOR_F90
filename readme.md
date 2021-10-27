@@ -69,17 +69,6 @@ This option determines the
 - `--directory=`: This option determines the directory name in which the matrix data used is contained. (default `--directory=RANDL7T`)
 The directory name must be the relative one.
 
-## Contacts
-
-Please provide feedback to [morikuni.keiichi.fw@u.tsukuba.ac.jp](mailto:morikuni.keiichi.fw@u.tsukuba.ac.jp) if you have any questions or suggestions.
-
-Keiichi Morikuni, Ph.D.  
-
-Affiliation: Faculty of Engineering, Information and Systems, University of Tsukuba  
-Postal Address: 1-1-1 Tennodai, Tsukuba, Ibaraki 305-8573, Japan
-
-Homepage URL: [http://researchmap.jp/KeiichiMorikuni/](http://researchmap.jp/KeiichiMorikuni/)
-
 ## Support
 
 The Graduate University for Advanced Studies (SOKENDAI), Shonan Village, Hayama, Kanagawa 240-0193 Japan
@@ -88,4 +77,21 @@ The Graduate University for Advanced Studies (SOKENDAI), Shonan Village, Hayama,
 ### References
 
 1. Keiichi Morikuni and Ken Hayami, Convergence of inner-iteration GMRES methods for rank-deficient least squares problems, SIAM Journal on Matrix Analysis and Applications, Volume 36, Issue 1, pages 225-250, 2015. DOI: [10.1137/130946009](https://doi.org/10.1137/130946009)
+
+If you use the codes in research for publication, please cite this paper.
+
+```
+@Article{Morikuni2021SIMAX,
+  author    = {Keiichi Morikuni and Ken Hayami},
+  doi       = {10.1137/130946009},
+  journal   = {SIAM Journal on Matrix Analysis and Applications},
+  number    = {1},
+  pages     = {225--250},
+  title     = {Convergence of inner-iteration GMRES methods for rank-deficient least squares problems},
+  volume    = {36},
+  year      = {2015},
+  publisher = {Society for Industrial {\&} Applied Mathematics ({SIAM})},
+}
+```
+
 
