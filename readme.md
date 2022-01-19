@@ -24,7 +24,7 @@ $ sh test.sh
 
 To compile the codes, execute the following:
 
-```
+```shell
 $ make
 ```
 
@@ -32,7 +32,7 @@ Change the Fortran compiler given in the Makefile file if necessary.
 
 To simply run the program with the default values of parameters on a test matrix RANDL7T, execute the following:
 
-```
+```shell
 $ ./main 
 ```
 Then the program outputs the approximate solution data solution.dat, the result data info.dat, and the relative residual norm history data reshis.dat.
@@ -40,7 +40,7 @@ The test matrix called RANDL7T in the compressed column storage (CCS) format is 
 
 To run the program with specific values of parameters on the test matrix RANDL7T, execute the following:
 
-```
+```shell
 $ ./main --at=1 --nin=50 --omg=1.0 --tol=1.0e-8 --omax=800 --rmax=0 -v --directory=RANDL7T/
 ```
 
@@ -80,7 +80,7 @@ The Graduate University for Advanced Studies (SOKENDAI), Shonan Village, Hayama,
 
 If you use the codes in research for publication, please cite this paper.
 
-```
+```bibtex
 @Article{Morikuni2021SIMAX,
   author    = {Keiichi Morikuni and Ken Hayami},
   doi       = {10.1137/130946009},
